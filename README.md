@@ -1,14 +1,70 @@
-# Animated Search Strategies for the 8-Puzzle Tile Game
-## Overview: 
-Create a web application that uses the 8-puzzle variant of the sliding-tile puzzle (Russell, Norvig 68) to demonstrate and compare a variety of search algorithms.
-## Method:
-* The team will use React to create an 8-puzzle game. The game will offer three modes of "play":
-* Play mode: Offers a randomized or user-selected starting position, and allows the user to attempt to solve the puzzle themselves. Will inform the user if the parity of the puzzle renders it impossible to solve, and will include a move counter and an indication that the user has successfully completed the puzzle.
-* Learning mode: A selection of search algorithms will be made available as detailed below. Each algorithm will have an illustrated explanation, and the user will be able to watch the computer solve the puzzle using the chosen algorithm. Additionally, in Play mode, the user will be able to receive hints from the algorithm of choice.
-* Test mode: The algorithms will be "pitted against" one another and the user will receive an output showing their results, similar to the table in the textbook (Russell, Norvig 99). The report will include a comparison of the performance of each algorithm
-## Algorithms: 
-A selection of search algorithms from the textbook, and from Heuristic Search - Theory and Applications by Stefan Edelkamp and Stefan Schroedl will be employed. While the algorithms used in the project may change in the future, the current list of proposed algorithms include breadth-first search, A* using different heuristics, pattern database solutions, and iterative-deepening A* search.
-## Related work:
-* Korf, R. E. and Reid, M. (1998). Complexity analysis of admissible heuristic search.
-* Kunkle, Daniel R. (2001). Solving the 8 Puzzle in a Minimum Number of Moves: An Application of the A* Algorithm. (2001).
-* Prieditis, A. E. (1993). Machine discovery of effective admissible heuristics.
+# Getting Started with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

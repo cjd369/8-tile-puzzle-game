@@ -1,0 +1,9 @@
+.board {
+  border:2px solid black;
+  background-color: rgb(25, 25, 35);
+  border-radius: 6px;
+  width: 306px;
+  display: block;
+  padding: 1px;
+  margin: auto;
+}
