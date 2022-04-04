@@ -1,4 +1,5 @@
 .tile {
+  font-size: 48px;
   display: inline-block;
   width: 100px;
   height: 100px;
@@ -10,4 +11,9 @@
   color: rgb(25, 25, 35);
   text-align: center;
   cursor: pointer;
+  line-height: 2em;
+}
+
+.tile[value='0'] {
+  visibility: hidden;
 }

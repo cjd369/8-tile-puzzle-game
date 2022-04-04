@@ -1,10 +1,11 @@
 import React from 'react';
 import './Tile.css';
 
-export default function Tile() {
+export default function Tile(props) {
+
   return (
-    <div className='tile'>
-        <h3>1</h3>
+    <div className='tile' onClick={() => props.handleClick(props.value)} value={props.value}>
+      {props.value}
     </div>
-  )
+  );
 }
