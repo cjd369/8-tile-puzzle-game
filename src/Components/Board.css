@@ -23,7 +23,9 @@ button {
   text-align: center;
 }
 
-form {
-  padding: 1 rem;
+.seedInput {
   color: white;
+  padding: 10px;
+  font-size: 32;
+  display: 'block';
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import './Board.css';
 import Tile from './Tile';
-import { newGrid } from './Shuffle'
+import DropDown from './DropDown'
+import { shuffle } from './Shuffle'
 import { pathStates } from './Algorithms/a-star'
 
 export class Board extends React.Component {
@@ -17,7 +18,12 @@ export class Board extends React.Component {
         [7, 8, 0],
       ],
       moves: 0,
+      seed: 0,
+      algo: "a-star",
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 
@@ -74,6 +80,21 @@ export class Board extends React.Component {
     
   }
 
+  handleChange = (event) => {
+    let target = event.target.name;
+    console.log(target);
+    if (target === "seed")
+      this.setState({seed: event.target.value});
+    else if (target === "algo")
+      this.setState({algo: event.target.value})
+  }
+
+  handleSubmit = (event) => {
+    this.setState({seed: event.target.value});
+    this.newGame();
+    event.preventDefault();
+  }
+
   // calculateTileCorrect = (i, j, value) => {
   //   // assuming all rows will have the same amount of tiles
   //   const tilesPerRow = this.state.grid[0].length; 
@@ -83,7 +104,7 @@ export class Board extends React.Component {
   // }
 
   newGame = () => {
-    let grid = newGrid();
+    let grid = shuffle(this.state.seed);
     let i, j;
     let empty_i, empty_j;
     let moves = 0;
@@ -102,8 +123,9 @@ export class Board extends React.Component {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
   }
 
+
   solve = async () => {
-    let sol = pathStates(this.state.grid);
+    let sol = pathStates(this.state.grid, this.state.algo);
     let i = 0;
     let moves = sol.length;
     for (let i = 0; i < moves; i++) {
@@ -121,12 +143,26 @@ export class Board extends React.Component {
     if (!win){
       return (
         <div>
-          <form>
+          <form className="seedInput" onSubmit={this.handleSubmit}>
             <label>
-              seed:
-              <input type="text" name="seed"/>
+              Algorithm:
+              <select name = "algo" value={this.state.algo} onChange={this.handleChange}>
+                <option value="a-star">A*</option>
+                <option value="Algorithm2">Algorithm 2</option>
+                <option value="Algorithm3">Algorithm 3</option>
+                <option value="Algorithm4">Algorithm 4</option>
+              </select>
             </label>
-            <input type="submit" value="Submit"/>
+            <label>
+              Seed:
+              <input
+                name="seed" 
+                type="number" 
+                seed={this.state.seed} 
+                onChange={this.handleChange} 
+                placeholder="Enter Seed"
+              />
+            </label>
           </form>
           <div className='board'>
             {//box section
@@ -169,10 +205,25 @@ export class Board extends React.Component {
     } else {
       return (
         <div>
-          <form>
+          <form className="seedInput" onSubmit={this.handleSubmit}>
             <label>
-              seed:
-              <input type="text" name="seed"/>
+              Algorithm:
+              <select name = "algo" value={this.state.algo} onChange={this.handleChange}>
+                <option value="a-star">A*</option>
+                <option value="Algorithm2">Algorithm 2</option>
+                <option value="Algorithm3">Algorithm 3</option>
+                <option value="Algorithm4">Algorithm 4</option>
+              </select>
+            </label>
+            <label>
+              Seed:
+              <input 
+                name = "seed"
+                type="number" 
+                seed={this.state.seed} 
+                onChange={this.handleChange}
+                placeholder="Enter Seed"
+              />
             </label>
           </form>
           <div className="board">

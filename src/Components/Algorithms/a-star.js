@@ -212,20 +212,39 @@ function convArr(arr) {
 }
 
 
-export function pathStates(node){
+export function pathStates(node, algo){
   let arr=[];
   arr=[].concat(...node); //converts 2d array into 1d array
   //console.log(arr);
   //console.log(node);
   let ret=[];
-  let puzzle =new Board(arr); 
-  let sol=solver(puzzle);
-  while(sol.parent!==-1){
-    ret.push(convArr(sol.arr));
-    sol=sol.parent;  
+  let puzzle =new Board(arr);
+  
+  switch (algo) {
+    case 'a-star':
+      console.log(algo);
+      let sol=solver(puzzle);
+      while(sol.parent!==-1){
+        ret.push(convArr(sol.arr));
+        sol=sol.parent;  
+      }
+      ret.push(convArr(sol.arr));
+      ret.reverse();
+      break;
+
+    case 'Algorithm2':
+      console.log(algo);
+      break;
+
+    case 'Algorithm3':
+      console.log(algo);
+      break;
+
+    case 'Algorithm4':
+      console.log(algo);
+      break;
   }
-  ret.push(convArr(sol.arr));
-  ret.reverse();
+
   //console.log(ret);
   return ret;
 }

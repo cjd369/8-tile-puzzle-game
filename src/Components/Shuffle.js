@@ -1,5 +1,6 @@
-function shuffle(seed = 50) {
+export function shuffle(seed) {
   
+  //console.log(seed);
   let temp;
   let arr=[0,1,2,3,4,5,6,7,8];
   let new_grid = [];
@@ -20,12 +21,15 @@ function shuffle(seed = 50) {
     }
     new_grid[j].push(arr[i]);
   }
-
+  //console.log(new_grid);
+  
   if(!isSolvable(new_grid)) {
-    //console.log({seed});
+    console.log("Not Solvable");
+    console.log(arr);
     return shuffle(seed + 1);
   } else {
-    //console.log({seed});
+    console.log("Solvable");
+    console.log(arr);
     return new_grid;
   }
 
@@ -51,12 +55,12 @@ function isSolvable(puzzle)
     // Count inversions in given 8 puzzle
     let invCount = getInvCount(puzzle);
     // return true if inversion count is even.
-    return (invCount % 2 == 0);
+    return (invCount % 2 === 0);
 }
 
 
-export function newGrid() {
-  let new_grid = shuffle();
+// export function newGrid() {
+//   let new_grid = shuffle();
 
-  return new_grid;
-}
+//   return new_grid;
+// }
