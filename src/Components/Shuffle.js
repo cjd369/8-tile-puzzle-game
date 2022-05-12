@@ -24,12 +24,12 @@ export function shuffle(seed) {
   //console.log(new_grid);
   
   if(!isSolvable(new_grid)) {
-    console.log("Not Solvable");
-    console.log(arr);
+    //console.log("Not Solvable");
+    //console.log(arr);
     return shuffle(seed + 1);
   } else {
-    console.log("Solvable");
-    console.log(arr);
+    //console.log("Solvable");
+    //console.log(arr);
     return new_grid;
   }
 

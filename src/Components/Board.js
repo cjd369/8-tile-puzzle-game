@@ -3,7 +3,7 @@ import './Board.css';
 import Tile from './Tile';
 import DropDown from './DropDown'
 import { shuffle } from './Shuffle'
-import { pathStates } from './Algorithms/a-star'
+import { solver } from './Algorithms/algorithms'
 
 export class Board extends React.Component {
 
@@ -19,7 +19,7 @@ export class Board extends React.Component {
       ],
       moves: 0,
       seed: 0,
-      algo: "a-star",
+      algo: "breadthBFS",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -82,7 +82,7 @@ export class Board extends React.Component {
 
   handleChange = (event) => {
     let target = event.target.name;
-    console.log(target);
+    //console.log(target);
     if (target === "seed")
       this.setState({seed: event.target.value});
     else if (target === "algo")
@@ -123,13 +123,51 @@ export class Board extends React.Component {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
   }
 
+  convArr = (arr) => {
+	let empty_i=0;
+	let empty_j=0;
+	let grid = [[], [], []];
+	for (let i = 0; i < 9; i++){
+		grid[Math.floor(i / 3)].push(arr[i]);
+		if(arr[i]===0)
+			{empty_i=Math.floor(i/3);empty_j=i%3}
+	  }
+	return {grid,empty_i,empty_j};
+  }
 
   solve = async () => {
-    let sol = pathStates(this.state.grid, this.state.algo);
+    let arr=[];
+    arr=[].concat(...this.state.grid);
+    console.log(arr);
+    switch (this.state.algo) {
+        case "breadthBFS": arr.push(0);
+                break;
+        case "aStarHamming": arr.push(1);
+                break;
+        case "aStarManhattan": arr.push(2);
+                break;
+        case "depthBFS": arr.push(3);
+                break;
+        case "aStarEuclid": arr.push(4);
+                break;
+        case "aStarMaxSwap":  arr.push(5);
+                break;
+        case "aStarNSwap": arr.push(6);
+                break;
+        case "iterativeDeepeningBFS": arr.push(7);
+                break;
+        case "depthLimitedBFS": arr.push(8);
+                break;
+    }
+    arr.push(10);
+    //console.log(arr);
+    let sol = solver(arr);
+    console.log(sol);
     let i = 0;
     let moves = sol.length;
     for (let i = 0; i < moves; i++) {
-      let new_grid = sol[i];
+      let new_grid = this.convArr(sol[i]);
+      console.log(new_grid);
       this.setState({ grid: new_grid.grid, empty_i: new_grid.empty_i, empty_j: new_grid.empty_j, moves: i+1});
       //await this.sleep(500);
     }
@@ -147,10 +185,15 @@ export class Board extends React.Component {
             <label>
               Algorithm:
               <select name = "algo" value={this.state.algo} onChange={this.handleChange}>
-                <option value="a-star">A*</option>
-                <option value="Algorithm2">Algorithm 2</option>
-                <option value="Algorithm3">Algorithm 3</option>
-                <option value="Algorithm4">Algorithm 4</option>
+                <option value="breadthBFS">breadthBFS</option>
+                <option value="aStarHamming">aStarHamming</option>
+                <option value="aStarManhattan">aStarManhattan</option>
+                <option value="depthBFS">depthBFS</option>
+                <option value="aStarEuclid">aStarEuclid</option>
+                <option value="aStarMaxSwap">aStarMaxSwap</option>
+                <option value="aStarNSwap">aStarNSwap</option>
+                <option value="iterativeDeepeningBFS">iterativeDeepeningBFS</option>
+                <option value="depthLimitedBFS">depthLimitedBFS</option>                
               </select>
             </label>
             <label>
@@ -209,10 +252,15 @@ export class Board extends React.Component {
             <label>
               Algorithm:
               <select name = "algo" value={this.state.algo} onChange={this.handleChange}>
-                <option value="a-star">A*</option>
-                <option value="Algorithm2">Algorithm 2</option>
-                <option value="Algorithm3">Algorithm 3</option>
-                <option value="Algorithm4">Algorithm 4</option>
+                <option value="breadthBFS">breadthBFS</option>
+                <option value="aStarHamming">aStarHamming</option>
+                <option value="aStarManhattan">aStarManhattan</option>
+                <option value="depthBFS">depthBFS</option>
+                <option value="aStarEuclid">aStarEuclid</option>
+                <option value="aStarMaxSwap">aStarMaxSwap</option>
+                <option value="aStarNSwap">aStarNSwap</option>
+                <option value="iterativeDeepeningBFS">iterativeDeepeningBFS</option>
+                <option value="depthLimitedBFS">depthLimitedBFS</option>
               </select>
             </label>
             <label>

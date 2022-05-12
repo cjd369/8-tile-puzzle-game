@@ -2,6 +2,7 @@
 
 /**************************************************************************************************************************************
 
+
 Inputs: an 8-puzzle problem in the form of an array:
 
 [[pos0,pos1...pos8], algorithm, depth]
@@ -113,8 +114,8 @@ class Node {
     }
 }
 
-let failure = new Node("failure", pathCost = Infinity);
-let cutoff = new Node("cutoff", pathCost = Infinity);
+let failure = new Node("failure", Node.pathCost = Infinity);
+let cutoff = new Node("cutoff", Node.pathCost = Infinity);
 
 
 function heuristic(f, node) {
@@ -170,6 +171,9 @@ function heuristic(f, node) {
             break;
 
     case 5: // h = number of swaps to solve if you can swap any tile with the blank tile
+
+
+
             let swaps = 0;
             let P = [...node.state];
             let zero = P.findIndex(elem => elem == 0);
@@ -215,9 +219,9 @@ function* expand(puzzle, node, f = 0, depth) {
 /* generator function to expand a node, generating the child nodes */
     let s = [...node.state];
     for (let action in puzzle.actions(s)) {                 // 1-3 possible moves
-        s1 = puzzle.result(s, puzzle.actions(s)[action]);   // the new state after we make that move
-        cost = node.pathCost + 1;
-        child = new Node(s1, node, action, cost);
+        let s1 = puzzle.result(s, puzzle.actions(s)[action]);   // the new state after we make that move
+        let cost = node.pathCost + 1;
+        let child = new Node(s1, node, action, cost);
         child.score = heuristic(f, child);
         if (depth != 0 && cost > depth) {
             child = cutoff;
@@ -229,21 +233,22 @@ function* expand(puzzle, node, f = 0, depth) {
 
 function pathStates(node) {
 /* the sequence of states to get to this node, and some statistics */
-    let paths = ["[1,2,3,4,5,6,7,8,0]"];      // make [] if you don't want the starting state in the array
+    let paths = [node.state];
 
     if (node.stateStr == "[1,2,3,4,5,6,7,8,0]" ) { // puzzle already solved
-         paths = ["[1,2,3,4,5,6,7,8,0]"];
+         paths = [node.state];
     }
     else {
         while (node.parent != null) {       // trace back parentage
-            paths.unshift(node.stateStr);
+            paths.unshift(node.state);
             node = node.parent;
+            //console.log(node);
         }
-        paths.unshift(node.stateStr);
+        paths.unshift(node.state);
     }
-    paths.push(paths.length - 1);
-    paths.push(reached.length);
-    paths.push(expanded);
+    //paths.push(paths.length - 1);
+    //paths.push(reached.length);
+    //paths.push(expanded);
     return paths;
 }
 
@@ -274,8 +279,8 @@ class Queue {
 
 function bestFirstSearch(puzzle, f = 0, depth = 0) {
 /* searches node at front of queue (with lowest f scores) first */
-    node = new Node(puzzle.initial);        // start with the initial puzzle
-    frontier = new Queue;           // a new frontier
+    let node = new Node(puzzle.initial);        // start with the initial puzzle
+    let frontier = new Queue;           // a new frontier
     frontier.add(node);                     // put the initial puzzle in the frontier queue
     reached = [puzzle.stateStr];         // array containing states already reached and their scores
     if (puzzle.isGoal(puzzle.initialStr)) {    // check that that the puzzle isn't already solved
@@ -349,7 +354,7 @@ function aStarNSwap(puzzle) {
     return bestFirstSearch(puzzle, 6);
 }
 
-function solver (problem) {
+export function solver (problem) {
     let puzzle = new Puzzle(problem.slice(0,9));
     switch (problem[9]) {
         case 0: return pathStates(breadthBFS(puzzle));
@@ -386,5 +391,4 @@ let p23 = ([ 1, 4, 2, 0, 7, 5, 3, 6, 8 ]);
 let p31 = ([ 8, 6, 7, 2, 5, 4, 3, 0, 1] );
 */
 
-// console.log(solver([ 4, 0, 2, 5, 1, 3, 7, 8, 6   , 4  , 0  ]));
-
+//console.log(solver([ 4, 0, 2, 5, 1, 3, 7, 8, 6   , 8  , 10  ]));
