@@ -233,10 +233,10 @@ function* expand(puzzle, node, f = 0, depth) {
 
 function pathStates(node) {
 /* the sequence of states to get to this node, and some statistics */
-    let paths = [node.state];
+    let paths = [];
 
     if (node.stateStr == "[1,2,3,4,5,6,7,8,0]" ) { // puzzle already solved
-         paths = [node.state];
+         paths = [];
     }
     else {
         while (node.parent != null) {       // trace back parentage

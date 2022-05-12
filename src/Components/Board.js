@@ -169,7 +169,7 @@ export class Board extends React.Component {
       let new_grid = this.convArr(sol[i]);
       console.log(new_grid);
       this.setState({ grid: new_grid.grid, empty_i: new_grid.empty_i, empty_j: new_grid.empty_j, moves: i+1});
-      //await this.sleep(500);
+      await this.sleep(250);
     }
   };
 
